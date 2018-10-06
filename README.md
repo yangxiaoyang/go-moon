@@ -68,9 +68,9 @@ m.Get("/", func() (int, string) {
 ~~~
 
 #### 服务的注入
-处理器是通过反射来调用的. Moon 通过*Dependency Injection* *（依赖注入）* 来为处理器注入参数列表. **这样使得Dacheng与Go语言的`http.HandlerFunc`接口完全兼容.**
+处理器是通过反射来调用的. Moon 通过*Dependency Injection* *（依赖注入）* 来为处理器注入参数列表. **这样使得Moon与Go语言的`http.HandlerFunc`接口完全兼容.**
 
-如果你加入一个参数到你的处理器, Dacheng将会搜索它参数列表中的服务，并且通过类型判断来解决依赖关系:
+如果你加入一个参数到你的处理器, Moon将会搜索它参数列表中的服务，并且通过类型判断来解决依赖关系:
 ~~~ go
 m.Get("/", func(res http.ResponseWriter, req *http.Request) { // res 和 req 是通过Dacheng注入的
   res.WriteHeader(200) // HTTP 200
@@ -119,7 +119,7 @@ m.NotFound(func() {
 
 路由匹配的顺序是按照他们被定义的顺序执行的. 最先被定义的路由将会首先被用户请求匹配并调用.
 
-路由模型可能包含参数列表, 可以通过dacheng.Params服务来获取:
+路由模型可能包含参数列表, 可以通过moon.Params服务来获取:
 ~~~ go
 m.Get("/hello/:name", func(params moon.Params) string {
   return "Hello " + params["name"]
@@ -184,7 +184,7 @@ m.Run()
 ~~~
 
 #### 请求级别的映射
-映射在请求级别的服务可以用dacheng.Context来完成:
+映射在请求级别的服务可以用moon.Context来完成:
 ~~~ go
 func MyCustomLoggerHandler(c moon.Context, req *http.Request) {
   logger := &MyCustomLogger{req}
@@ -203,13 +203,13 @@ func WrapResponseWriter(res http.ResponseWriter, c moon.Context) {
 
 ### 服务静态文件
 moon.Classic() 默认会服务位于你服务器环境根目录下的"public"文件夹.
-你可以通过加入dacheng.Static的处理器来加入更多的静态文件服务的文件夹.
+你可以通过加入moon.Static的处理器来加入更多的静态文件服务的文件夹.
 ~~~ go
 m.Use(moon.Static("assets")) // 也会服务静态文件于"assets"的文件夹
 ~~~
 
 ## 中间件处理器
-中间件处理器是工作于请求和路由之间的. 本质上来说和Martini其他的处理器没有分别. 你可以像如下这样添加一个中间件处理器到它的堆中:
+中间件处理器是工作于请求和路由之间的. 本质上来说和Moon其他的处理器没有分别. 你可以像如下这样添加一个中间件处理器到它的堆中:
 ~~~ go
 m.Use(func() {
   // 做一些中间件该做的事情
@@ -250,7 +250,7 @@ m.Use(func(c moon.Context, log *log.Logger){
 ~~~
 
 ## Moon Env
-一些handler使用环境变量 `moon.Env` 对开发环境和生产环境提供特殊功能. 推荐在生产环境设置环境变量 `DACHENG_ENV=production`.
+一些handler使用环境变量 `moon.Env` 对开发环境和生产环境提供特殊功能. 推荐在生产环境设置环境变量 `MOON_ENV=production`.
 
 ## 我在哪里可以找到中间件资源?
 
@@ -282,7 +282,7 @@ Moon框架支持Martini所有的中间件，可以查看 [contrib](https://githu
 
 ## 我如何整合到我现有的服务器中?
 
-由于Dacheng实现了 `http.Handler`, 所以它可以很简单的应用到现有Go服务器的子集中. 例如说这是一段在Google App Engine中的示例:
+由于Moon实现了 `http.Handler`, 所以它可以很简单的应用到现有Go服务器的子集中. 例如说这是一段在Google App Engine中的示例:
 
 ~~~ go
 package hello
