@@ -1,6 +1,6 @@
 Moon，月球。是一个强大为了编写模块化Web应用而生的GO语言框架。
 
-重要说明：这是一个即将改写的应用框架，非原创。
+**重要说明**：这是一个即将改写的应用框架，非原创。
 
 ## 第一个应用
 
@@ -28,10 +28,6 @@ go run server.go
 ~~~
 
 这时你将会有一个moon的服务监听了, 地址是: `localhost:3000`.
-
-
-## 更多中间件
-更多的中间件和功能组件, 请使用代码仓库: [martini-contrib](https://github.com/martini-contrib).
 
 
 ## 核心 Moon
@@ -178,7 +174,7 @@ m.Group("/books", func(r moon.Router) {
 
 
 #### 全局映射
-如果一个Martini实现了inject.Injector的接口, 那么映射成为一个服务就非常简单:
+如果一个Moon实现了inject.Injector的接口, 那么映射成为一个服务就非常简单:
 ~~~ go
 db := &MyDatabase{}
 m := moon.Classic()
