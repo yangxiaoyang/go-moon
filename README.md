@@ -9,7 +9,7 @@ Moon，月球。是一个强大为了编写模块化Web应用而生的GO语言�
 ~~~ go
 package main
 
-import ".../moon"
+import "https://github.com/yangxiaoyang/go-moon"
 
 func main() {
   m := moon.Classic()
@@ -90,7 +90,7 @@ m.Get("/", func(res http.ResponseWriter, req *http.Request) { // res 和 req 是
   * [*http.Request] - http Request. （http请求)
 
 ### 路由
-在Martini中, 路由是一个HTTP方法配对一个URL匹配模型. 每一个路由可以对应一个或多个处理器方法:
+在Moon中, 路由是一个HTTP方法配对一个URL匹配模型. 每一个路由可以对应一个或多个处理器方法:
 ~~~ go
 m.Get("/", func() {
   // 显示
@@ -293,7 +293,7 @@ package hello
 
 import (
   "net/http"
-  ".../moon"
+  "https://github.com/yangxiaoyang/go-moon"
 )
 
 func init() {
